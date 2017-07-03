@@ -4,6 +4,7 @@ md-input-container, button {
 
 button {
   display: block;
+  margin-top: 20px;
 }
 
 form {
@@ -11,4 +12,15 @@ form {
   background: #fafafa;
   border: 1px solid #ebebeb;
   box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+.errors-card {
+  background: rgba(169, 68, 66, .3);
+  color: white;
+}
+
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin: -5px 0;
 }

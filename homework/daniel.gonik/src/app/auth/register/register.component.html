@@ -21,6 +21,12 @@
            id="email" name="email">
     <md-hint align="start">Email</md-hint>
   </md-input-container>
+  <div class="error-msg" *ngIf="user.get('email').hasError('uniqueEmail') && user.get('email').invalid">
+    Email should be unique
+  </div>
+  <div class="error-msg" *ngIf="user.get('email').hasError('email') && user.get('email').touched">
+    Incorrect email format
+  </div>
 
   <md-input-container class="half-width">
     <input mdInput type="text"
@@ -28,6 +34,12 @@
            id="username" name="username">
     <md-hint align="start">Username</md-hint>
   </md-input-container>
+  <div class="error-msg" *ngIf="user.get('username').hasError('required') && user.get('username').touched">
+    Username is required
+  </div>
+  <div class="error-msg" *ngIf="user.get('username').hasError('uniqueUsername') && user.get('username').invalid">
+    Username should be unique
+  </div>
 
   <md-input-container class="half-width">
     <input mdInput type="password"
@@ -35,13 +47,12 @@
            id="password" name="password">
     <md-hint align="start">Password</md-hint>
   </md-input-container>
+  <div class="error-msg" *ngIf="user.get('password').hasError('required') && user.get('password').touched">
+    Password is required
+  </div>
 
   <button md-raised-button color="warn" type="submit" name="action">
     REGISTER
   </button>
-
-  <span id="err" *ngIf="errorMsg">
-    <small>{{ errorMsg }}</small>
-  </span>
 
 </form>

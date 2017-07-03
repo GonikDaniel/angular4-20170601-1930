@@ -49,6 +49,10 @@ export class AuthService {
     this._router.navigate(['/auth/login']);
   }
 
+  get mockedUsers() {
+    return users;
+  }
+
   get isAuthorized() {
     return localStorage.getItem('user') !== null;
   }

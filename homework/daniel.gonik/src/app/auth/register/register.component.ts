@@ -43,8 +43,8 @@ export class RegisterComponent implements OnInit {
 
     this._authService.register(this.user.value)
       .subscribe(
-        user => this._login(user.username, user.password),
-        error => console.error(error)
+        (user) => this._login(user.username, user.password),
+        (error) => console.error(error)
       );
   }
 

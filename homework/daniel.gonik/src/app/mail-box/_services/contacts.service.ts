@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import { AuthService } from '../../auth/auth.service';
 import { countries } from '../../_data/countries';
 
 @Injectable()
 export class ContactsService {
 
   private _contacts = [];
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private _authService: AuthService
+  ) {
     if (!this._contacts.length) {
       this._fetchData();
     }
@@ -47,7 +51,7 @@ export class ContactsService {
   }
 
   isUsernameUnique(username) {
-    return !this._contacts.find(contact => contact.username === username);
+    return !this._authService.mockedUsers.find(user => user.username === username);
   }
 
   _getFromCache() {
