@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { MailListComponent } from './mail-box/mail-list/mail-list.component';
 import { MailViewComponent } from './mail-box/mail-view/mail-view.component';
 import { ContactsComponent } from './mail-box/contacts/contacts.component';
@@ -30,13 +31,13 @@ export const routes: Route[] = [
           title: 'Login'
         },
       },
-      // {
-      //   path: 'register',
-      //   component: RegisterComponent
-      //   data: {
-      //     title: 'Register'
-      //   },
-      // }
+      {
+        path: 'register',
+        component: RegisterComponent,
+        data: {
+          title: 'Register'
+        },
+      }
     ]
   },
   {

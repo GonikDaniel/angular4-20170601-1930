@@ -1,19 +1,20 @@
 <form role="form" (submit)="login()">
+
   <md-input-container class="half-width">
-    <!-- placeholder="Username" -->
     <input mdInput type="text" required
            [(ngModel)]="user.username"
            id="username" name="username"
            autofocus="autofocus">
     <md-hint align="start">Username</md-hint>
   </md-input-container><br><br>
+
   <md-input-container class="half-width">
-    <!-- placeholder="Password" -->
     <input mdInput type="password" required
            [(ngModel)]="user.password"
            id="password" name="password">
     <md-hint align="start">Password</md-hint>
   </md-input-container><br><br>
+
   <button md-raised-button color="warn" type="submit" name="action">
     LOGIN
   </button>

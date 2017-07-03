@@ -1,0 +1,47 @@
+<form role="form" (submit)="register(user)" [formGroup]="user">
+
+  <md-input-container class="half-width">
+    <input mdInput type="text"
+           formControlName="firstName"
+           id="firstName" name="firstName"
+           autofocus>
+    <md-hint align="start">First Name</md-hint>
+  </md-input-container>
+
+  <md-input-container class="half-width">
+    <input mdInput type="text"
+           formControlName="surname"
+           id="surname" name="surname">
+    <md-hint align="start">Last Name</md-hint>
+  </md-input-container>
+
+  <md-input-container class="half-width">
+    <input mdInput type="text"
+           formControlName="email"
+           id="email" name="email">
+    <md-hint align="start">Email</md-hint>
+  </md-input-container>
+
+  <md-input-container class="half-width">
+    <input mdInput type="text"
+           formControlName="username"
+           id="username" name="username">
+    <md-hint align="start">Username</md-hint>
+  </md-input-container>
+
+  <md-input-container class="half-width">
+    <input mdInput type="password"
+           formControlName="password"
+           id="password" name="password">
+    <md-hint align="start">Password</md-hint>
+  </md-input-container>
+
+  <button md-raised-button color="warn" type="submit" name="action">
+    REGISTER
+  </button>
+
+  <span id="err" *ngIf="errorMsg">
+    <small>{{ errorMsg }}</small>
+  </span>
+
+</form>

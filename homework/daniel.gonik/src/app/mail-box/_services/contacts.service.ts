@@ -42,8 +42,12 @@ export class ContactsService {
     });
   }
 
-  isEmailUnique(email, id) {
+  isEmailUnique(email, id = null) {
     return !this._contacts.find(contact => contact.email === email && contact.id !== id);
+  }
+
+  isUsernameUnique(username) {
+    return !this._contacts.find(contact => contact.username === username);
   }
 
   _getFromCache() {

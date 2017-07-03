@@ -29,6 +29,7 @@ import {
 
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { MailBoxComponent } from './mail-box/mail-box.component';
 import { MailListComponent } from './mail-box/mail-list/mail-list.component';
 import { MailViewComponent } from './mail-box/mail-view/mail-view.component';
@@ -68,7 +69,8 @@ import { routes } from './app.routes';
     RelativeDatePipe,
     AutofocusDirective,
     SettingsComponent,
-    ContactEditComponent
+    ContactEditComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
