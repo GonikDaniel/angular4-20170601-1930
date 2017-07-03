@@ -29,6 +29,21 @@ export class AuthService {
     });
   }
 
+  register(model) {
+    return Observable.create(observer => {
+      const user = new User(
+        users.length, // id
+        model.username,
+        model.password,
+        model.firstName,
+        model.surname,
+        '' // country
+      );
+      users.push(user);
+      observer.next(user);
+    });
+  }
+
   logout() {
     localStorage.removeItem('user');
     this._router.navigate(['/auth/login']);

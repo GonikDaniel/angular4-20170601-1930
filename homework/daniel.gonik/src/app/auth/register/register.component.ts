@@ -19,10 +19,10 @@ export class RegisterComponent implements OnInit {
   public errorMsg;
 
   constructor(
-    private router: Router,
+    private _router: Router,
     private _formBuilder: FormBuilder,
-    private authService: AuthService,
-    private contactsService: ContactsService
+    private _authService: AuthService,
+    private _contactsService: ContactsService
   ) { }
 
   ngOnInit() {
@@ -39,18 +39,32 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.user.value, this.user.valid);
+    if (!this.user.valid) return;
+
+    this._authService.register(this.user.value)
+      .subscribe(
+        user => this._login(user.username, user.password),
+        error => console.error(error)
+      );
   }
 
-  _uniqueEmail(formControl: FormControl) {
-    if(!this.contactsService.isEmailUnique(formControl.value)) {
+  private _login(username, password) {
+    this._authService.login(username, password)
+      .subscribe(
+        (data) => this._router.navigate(['/app/inbox']), // this.returnUrl
+        (error) => this.errorMsg = error
+      );
+  }
+
+  private _uniqueEmail(formControl: FormControl) {
+    if(!this._contactsService.isEmailUnique(formControl.value)) {
       return Observable.of({ uniqueEmail: { error: 'Email has to be unique!' } });
     }
     return Observable.of(null);
   }
 
-  _uniqueUsername(formControl: FormControl) {
-    if(!this.contactsService.isUsernameUnique(formControl.value)) {
+  private _uniqueUsername(formControl: FormControl) {
+    if(!this._contactsService.isUsernameUnique(formControl.value)) {
       return Observable.of({ uniqueUsername: { error: 'Username has to be unique!' } });
     }
     return Observable.of(null);
