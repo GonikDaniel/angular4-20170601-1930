@@ -28,7 +28,7 @@ export class ContactEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private contactsService: ContactsService,
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     public snackBar: MdSnackBar
   ) {
     this.contact = new User();
@@ -41,7 +41,7 @@ export class ContactEditComponent implements OnInit {
       this.contactsService.getUserById(id)
         .subscribe(contact => {
           this.contact = contact;
-          this._initFormGroup();
+          this.initFormGroup();
           this.isLoading = false;
         });
     });
@@ -68,12 +68,12 @@ export class ContactEditComponent implements OnInit {
     console.log('undo');
   }
 
-  private _initFormGroup() {
-    this.contactModel = this._formBuilder.group({
+  private initFormGroup() {
+    this.contactModel = this.formBuilder.group({
       firstName: [this.contact.firstName, [Validators.required, Validators.minLength(2)]],
       surname: [this.contact.surname, [Validators.required]],
-      country: [this.contact.country, null, this._countryAsyncValidator.bind(this)],
-      email: [this.contact.email, Validators.email, this._uniqueEmail.bind(this)]
+      country: [this.contact.country, null, this.countryAsyncValidator.bind(this)],
+      email: [this.contact.email, Validators.email, this.uniqueEmail.bind(this)]
     });
 
     // this.contactModel.valueChanges.subscribe(console.log);
@@ -90,14 +90,14 @@ export class ContactEditComponent implements OnInit {
       : this.countries;
   }
 
-  private _countryAsyncValidator(formControl: FormControl) {
+  private countryAsyncValidator(formControl: FormControl) {
     if(!formControl.value){
       return Observable.of({ country: { error: 'Country field cannot be empty!' } });
     }
     return Observable.of(null);
   }
 
-  private _uniqueEmail(formControl: FormControl) {
+  private uniqueEmail(formControl: FormControl) {
     if(this.contactsService && !this.contactsService.isEmailUnique(formControl.value, this.contact.id)) {
       return Observable.of({ uniqueEmail: { error: 'Email has to be unique!' } });
     }

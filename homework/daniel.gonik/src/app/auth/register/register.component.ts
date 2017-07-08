@@ -19,18 +19,18 @@ export class RegisterComponent implements OnInit {
   public errorMsg;
 
   constructor(
-    private _router: Router,
-    private _formBuilder: FormBuilder,
-    private _authService: AuthService,
-    private _contactsService: ContactsService
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private contactsService: ContactsService
   ) { }
 
   ngOnInit() {
-    this.user = this._formBuilder.group({
+    this.user = this.formBuilder.group({
       firstName: [''],
       surname: [''],
-      email: ['', Validators.email, this._uniqueEmail.bind(this)],
-      username: ['', [Validators.required], this._uniqueUsername.bind(this)],
+      email: ['', Validators.email, this.uniqueEmail.bind(this)],
+      username: ['', [Validators.required], this.uniqueUsername.bind(this)],
       password: ['', Validators.required]
     });
 
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   register() {
     if (!this.user.valid) return;
 
-    this._authService.register(this.user.value)
+    this.authService.register(this.user.value)
       .subscribe(
         (user) => this._login(user.username, user.password),
         (error) => console.error(error)
@@ -49,22 +49,22 @@ export class RegisterComponent implements OnInit {
   }
 
   private _login(username, password) {
-    this._authService.login(username, password)
+    this.authService.login(username, password)
       .subscribe(
-        (data) => this._router.navigate(['/app/inbox']), // this.returnUrl
+        (data) => this.router.navigate(['/app/inbox']), // this.returnUrl
         (error) => this.errorMsg = error
       );
   }
 
-  private _uniqueEmail(formControl: FormControl) {
-    if(!this._contactsService.isEmailUnique(formControl.value)) {
+  private uniqueEmail(formControl: FormControl) {
+    if(!this.contactsService.isEmailUnique(formControl.value)) {
       return Observable.of({ uniqueEmail: { error: 'Email has to be unique!' } });
     }
     return Observable.of(null);
   }
 
-  private _uniqueUsername(formControl: FormControl) {
-    if(!this._contactsService.isUsernameUnique(formControl.value)) {
+  private uniqueUsername(formControl: FormControl) {
+    if(!this.contactsService.isUsernameUnique(formControl.value)) {
       return Observable.of({ uniqueUsername: { error: 'Username has to be unique!' } });
     }
     return Observable.of(null);

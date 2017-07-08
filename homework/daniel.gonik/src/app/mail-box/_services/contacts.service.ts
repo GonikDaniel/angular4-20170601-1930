@@ -8,24 +8,24 @@ import { countries } from '../../_data/countries';
 @Injectable()
 export class ContactsService {
 
-  private _contacts = [];
+  private contacts = [];
   constructor(
     private http: Http,
-    private _authService: AuthService
+    private authService: AuthService
   ) {
-    if (!this._contacts.length) {
-      this._fetchData();
+    if (!this.contacts.length) {
+      this.fetchData();
     }
   }
 
   getUsers() {
-    return this._contacts.length
-      ? this._getFromCache()
-      : this._fetchData();
+    return this.contacts.length
+      ? this.getFromCache()
+      : this.fetchData();
   }
 
   getUserById(id) {
-    return this._getFromCacheById(id);
+    return this.getFromCacheById(id);
   }
 
   getCountries() {
@@ -34,9 +34,9 @@ export class ContactsService {
 
   saveContact(contact) {
     return Observable.create(observer => {
-      const index = this._contacts.findIndex(item => item.id === contact.id);
+      const index = this.contacts.findIndex(item => item.id === contact.id);
       if (index !== -1) {
-        this._contacts[index] = contact;
+        this.contacts[index] = contact;
         observer.next(contact);
         observer.complete();
       } else {
@@ -47,40 +47,40 @@ export class ContactsService {
   }
 
   isEmailUnique(email, id = null) {
-    return !this._contacts.find(contact => contact.email === email && contact.id !== id);
+    return !this.contacts.find(contact => contact.email === email && contact.id !== id);
   }
 
   isUsernameUnique(username) {
-    return !this._authService.mockedUsers.find(user => user.username === username);
+    return !this.authService.mockedUsers.find(user => user.username === username);
   }
 
-  _getFromCache() {
+  private getFromCache() {
     return Observable.create(observer => {
-      observer.next(this._contacts);
+      observer.next(this.contacts);
       observer.complete();
     });
   }
 
-  _fetchData() {
+  private fetchData() {
     return this.http.get('https://learn.javascript.ru/courses/groups/api/participants?key=1fxf2pg')
       .map(response => {
-        this._contacts = response.json();
-        this._contacts.forEach((user, index) => {
+        this.contacts = response.json();
+        this.contacts.forEach((user, index) => {
           user.id = index;
           user.email = `test${index}@email.com`;
         });
-        return Object.assign([], this._contacts);
+        return Object.assign([], this.contacts);
       });
   }
 
-  private _getFromCacheById(id) {
+  private getFromCacheById(id) {
     return Observable.create(observer => {
-      if (this._contacts.length) {
-        const cached = this._contacts.find(user => user.id === id);
+      if (this.contacts.length) {
+        const cached = this.contacts.find(user => user.id === id);
         observer.next(cached);
         observer.complete();
       } else {
-        const user = this._fetchData()
+        const user = this.fetchData()
           .subscribe(users => {
             const user = users.find((user: any) => user.id === id);
             observer.next(user);

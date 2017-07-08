@@ -13,7 +13,7 @@ const users = [
 export class AuthService {
 
   constructor(
-     private _router: Router
+     private router: Router
   ) { }
 
   login(username, password) {
@@ -46,7 +46,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('user');
-    this._router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   get mockedUsers() {
