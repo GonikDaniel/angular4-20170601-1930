@@ -1,0 +1,9 @@
+<p>
+  wiki-search
+</p>
+
+<app-search ></app-search>
+
+<ul>
+  <li *ngFor="let result of searchResults | async;">{{result}}</li>
+</ul>

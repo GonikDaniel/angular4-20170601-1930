@@ -23,6 +23,6 @@ export class LoginService {
   }
 
   isUserLoggedIn(): boolean {
-    return this.userLoggedIn;
+    return !this.userLoggedIn;
   }
 }

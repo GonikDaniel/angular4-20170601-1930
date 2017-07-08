@@ -1,0 +1,74 @@
+<!--reactive-->
+<form  [formGroup]="userForm"
+       (ngSubmit)="onSubmit(userForm)"
+       class="form-horizontal">
+
+  <div class="form-group">
+    <label for="firstName" class="col-sm-2 control-label"><strong>First Name</strong></label>
+    <div class="col-sm-10">
+      <input formControlName="firstName"
+             type="text"
+             class="form-control"
+             id="firstName"
+             placeholder="firstName"
+             name="firstName"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="surname" class="col-sm-2 control-label"><strong>Surname</strong></label>
+    <div class="col-sm-10">
+      <input formControlName="surname"
+             type="text"
+             class="form-control"
+             id="surname"
+             placeholder="surname"
+             name="surname"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="country" class="col-sm-2 control-label"><strong>Country</strong></label>
+    <div class="col-sm-10">
+      <input formControlName="country"
+             class="form-control"
+             type="text"
+             id="country"
+             placeholder="country"
+             name="country"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label"><strong>Address</strong></label>
+    <div class="col-sm-10">
+      <input formControlName="email"
+             type="email" class="form-control" id="email"
+             placeholder="email"
+             name="email"
+             autocomplete="false"
+      />
+      <div class="alert alert-danger" role="alert">
+        <strong>email:</strong> {{userForm.controls.email?.errors | json}}
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong> {{userForm.errors | json}}
+  </div>
+  <div class="alert alert-danger" role="alert">
+    <strong>Oh snap!</strong> {{userForm.valid | json}}
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10 text-center">
+      <button [disabled]="!userForm.valid"
+              type="submit"
+              class="btn btn-success">Apply</button>
+    </div>
+  </div>
+</form>

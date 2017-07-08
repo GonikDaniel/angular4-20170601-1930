@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, OnInit, OnDestroy
+  Component, ElementRef, OnInit, OnDestroy,
   ViewChild
 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -8,10 +8,10 @@ import { WikiSearchService } from 'app/wiki-rx-search/wiki-search.service';
 import 'rxjs/add/operator/filter';
 
 interface Entity {
-  "name": string,
-  "link": string,
-  "description": string
-}
+  snames: string;
+  slinks: string;
+  sdescriptions: string;
+};
 
 @Component({
   selector: 'wiki-rx-search',
@@ -25,16 +25,23 @@ export class WikiRxSearchComponent implements OnInit, OnDestroy {
   constructor(private wikiSearchService: WikiSearchService) { }
   // entities |async
   ngOnInit() {
-    this.entities = Observable.fromEvent<KeyboardEvent>(this.search.nativeElement, 'input')
+    // this.entities = Observable.fromEvent<KeyboardEvent>(this.search.nativeElement, 'input')
+    //   .map(event => (event.target as HTMLInputElement).value)
+    //   .debounceTime(400)
+    //   .distinctUntilChanged()
+    //   .filter(term => term.trim().length != 0)
+    //   .switchMap((term: string) => this.wikiSearchService.getEntities(term.trim()))
+    Observable.fromEvent<KeyboardEvent>(this.search.nativeElement, 'input')
       .map(event => (event.target as HTMLInputElement).value)
       .debounceTime(400)
       .distinctUntilChanged()
-      .filter(term => term.trim().length != 0)
-      .switchMap((term: string) => this.wikiSearchService.getEntities(term.trim()))
-      // .subscribe((response) => {
-      //   this.entities = response;
-      // });
-
+      .filter(term => term.trim().length !== 0)
+      .subscribe((term: string) => {
+        this.wikiSearchService.getEntities(term.trim())
+          .subscribe((response) => {
+            this.entities = response;
+          });
+      });
   }
 
   ngOnDestroy() {

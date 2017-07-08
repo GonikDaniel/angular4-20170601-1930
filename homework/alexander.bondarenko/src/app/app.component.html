@@ -1,22 +1,12 @@
+<div class="router-menu">
 
-<md-toolbar color="primary">
-  <button class="app-icon-button" >
-    <i class="material-icons app-toolbar-menu">menu</i>
-  </button>
+  <a routerLink=""
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="routerLinkActiveOptions">MailBox</a>
 
-  MailBox app
+  <a routerLink="users" routerLinkActive="active">Users</a>
 
-  <span class="app-toolbar-filler"></span>
-</md-toolbar>
-
-<app-exchange-widget></app-exchange-widget>
-
-<div class="app-content">
-  <app-mail-box></app-mail-box>
+  <a routerLink="wiki-search" routerLinkActive="active">Search Wiki</a>
 </div>
 
-<div class="app-content">
-  <app-user-list></app-user-list>
-</div>
-
-
+<router-outlet></router-outlet>

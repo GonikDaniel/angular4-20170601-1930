@@ -20,13 +20,13 @@ export class WikiSearchService {
         search: params.toString() // <- work around, without toString() parameters don't exist in URL request :(
       })
       .map(response => {
-        let responseData = <string[]>response.json();
-        let names = responseData[1];
-        let descriptions = responseData[2];
-        let links = responseData[3];
-        let length = names.length;
+        const responseData = <string[]>response.json();
+        const names = responseData[1];
+        const descriptions = responseData[2];
+        const links = responseData[3];
+        const length = names.length;
 
-        let result: any[] = [];
+        const result: any[] = [];
 
         for (let i = 0; i < length; i++) {
           result.push({

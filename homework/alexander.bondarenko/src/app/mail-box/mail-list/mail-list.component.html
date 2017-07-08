@@ -1,1 +1,1 @@
-<app-mail *ngFor="let mail of mails;" [mail]="mail" (mailDeleted)="processDeleted($event)"></app-mail>
+<app-mail *ngFor="let mail of mails | async;" [mail]="mail" (mailDeleted)="processDeleted($event)"></app-mail>

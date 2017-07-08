@@ -1,4 +1,5 @@
 <a routerLink="/">к пользователям</a>
+<!--
  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 <p>
   name <input required #nameModel="ngModel" name="name" type="text" [ngModel]="user.name">
@@ -11,4 +12,21 @@
 </p>
   <input type="submit" value="save"/>
 </form>
+-->
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <p>
+    name <input type="text" formControlName="name">
+  </p>
+  <p>
+    surname <input type="text" formControlName="surname">
+  </p>
+  <p>
+    email <input type="text" formControlName="email">
+  </p>
+
+  <input type="submit" value="save"/>
+</form>
+
 

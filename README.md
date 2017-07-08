@@ -27,6 +27,12 @@ git
 
 [github/github-pages]
 
+10.07
+[имя] [github] [github-pages]
+
+13.07
+[имя] [github] [github-pages]
+
 
 Как задавать вопрос
 - групповой чат

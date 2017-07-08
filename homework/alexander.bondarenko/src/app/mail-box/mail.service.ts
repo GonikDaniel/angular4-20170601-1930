@@ -1,24 +1,30 @@
-import { Injectable } from '@angular/core';
-import {Mail} from "./mail.model";
-
 import * as faker from 'faker';
-import {MAILS} from "./mails.mock";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import 'rxjs/add/operator/distinctUntilChanged'
+
+import { Mail } from "./mail.model";
+import { MAILS } from "./mails.mock";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class MailService {
-  private _mails: Mail[] = [];
+  private _mails: Mail[];
+  private _mails$$: BehaviorSubject<Mail[]>;
   private _receivingTimer;
 
   constructor() {
-    this._mails = MAILS;
+    this._mails = MAILS.slice();
+    this._mails$$ = new BehaviorSubject(this._mails);
   }
 
-  getMails() {
-    return this._mails;
+  getMails(): Observable<Mail[]> {
+    return this._mails$$.asObservable().distinctUntilChanged();
   }
 
-  createMail(mail:Mail) {
+  createMail(mail: Mail) {
     this._mails.push(mail);
+    this._mails$$.next(this._mails);
   }
 
   deleteMail(mail: Mail) {
@@ -26,6 +32,8 @@ export class MailService {
     if (i => 0) {
       this._mails.splice(i, 1);
     }
+
+    this._mails$$.next(this._mails);
   }
 
   receive(count) {

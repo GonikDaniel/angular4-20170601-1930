@@ -12,6 +12,7 @@ import { UsersRoutingModule } from 'app/users-routing/users-routing.module';
 import { UserComponent } from './users-routing/users/user/user.component';
 import { EmailComponent } from './users-routing/emails/email/email.component';
 import { LoginComponent } from './users-routing/login/login.component';
+import { FormsLessonModule } from 'app/forms-lesson/forms-lesson.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginComponent } from './users-routing/login/login.component';
     MailboxModule,
     UsersCurrencyModule,
     WikiRxSearchModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    FormsLessonModule
   ],
   bootstrap: [AppComponent]
 })

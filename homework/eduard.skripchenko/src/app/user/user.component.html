@@ -1,42 +1,42 @@
-<form class="form-horizontal" (ngSubmit)="onSubmit()" #userForm="ngForm">
+<form class="form-horizontal" [formGroup]="userDetailsFormGroup" novalidate>
     <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputName" placeholder="Name" required name="inputName" [ngModel]="user.name"
-            />
+            <input type="text" class="form-control" id="inputName" placeholder="Name"
+                formControlName="name" />
         </div>
     </div>
     <div class="form-group">
         <label for="inputGender" class="col-sm-2 control-label">Gender</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputGender" placeholder="Gender" required name="inputGender" [ngModel]="user.gender"
-            />
+            <input type="text" class="form-control" id="inputGender" placeholder="Gender"
+                formControlName="gender" />
         </div>
     </div>
     <div class="form-group">
         <label for="inputBirthDate" class="col-sm-2 control-label">Birth date</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputBirthDate" placeholder="Birth date" required name="inputBirthDate" [ngModel]="user.birthDate"
-            />
+            <input type="text" class="form-control" id="inputBirthDate" placeholder="Birth date"
+                formControlName="birthDate" />
         </div>
     </div>
     <div class="form-group">
         <label for="inputAddress" class="col-sm-2 control-label">Address</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputAddress" placeholder="Address" required name="inputAddress" [ngModel]="user.address"
-            />
+            <input type="text" class="form-control" id="inputAddress" placeholder="Address"
+                formControlName="address" />
         </div>
     </div>
     <div class="form-group">
         <label for="inputEmail" class="col-sm-2 control-label">e-mail</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail" placeholder="e-mail" required name="inputEmail" [ngModel]="user.email"
-            appEmailValidator />
+            <input type="text" class="form-control" id="inputEmail" placeholder="e-mail"
+                formControlName="email" />
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+            <button type="submit" class="btn btn-success" [disabled]="userDetailsFormGroup.invalid">Submit</button>
         </div>
     </div>
 </form>

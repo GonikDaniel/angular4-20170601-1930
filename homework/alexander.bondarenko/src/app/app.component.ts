@@ -7,5 +7,5 @@ import { MdButton } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  private routerLinkActiveOptions = {exact: true};
 }

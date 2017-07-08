@@ -1,5 +1,23 @@
+<form [formGroup]="userListForm">
+  <ul>
+    <li *ngFor="let user of userListForm.controls.users.controls; let i = index">
+      <fieldset [formGroup]="user">
+        <input type="text" formControlName="name">
+        <input type="text" formControlName="surname">
+        <input type="text" formControlName="email">
+        <button (click) = "removeUser(i)">delete</button>
+        <a [routerLink]="['edit', i]">edit</a>
+      </fieldset>
+    </li>
+  </ul>
+  <button (click)="addUser()">add user</button>
+
+
+</form>
+<!--
 <ul>
   <li *ngFor="let user of users">
     <app-user [user]="user"></app-user>
   </li>
 </ul>
+-->

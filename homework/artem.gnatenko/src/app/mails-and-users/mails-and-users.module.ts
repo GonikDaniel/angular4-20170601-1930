@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppModule } from '../app.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MailsAndUsersComponent } from './mails-and-users.component';
 import { TimeElapsedPipe } from '../pipes/time-elapsed/time-elapsed.pipe';
 import { CountryfromISOPipe } from '../pipes/country-from-iso/countryfrom-iso.pipe';
@@ -15,12 +15,14 @@ import { mailsAndUsersRouting } from './mails-and-users.routing';
 import { MailPageComponent } from './mail-page/mail-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-import { AsyncEmailValidatorDirective } from '../validators/async-email-validator.directive';
+import { ValidatorsModule } from '../validators/validators.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    ValidatorsModule,
     mailsAndUsersRouting
   ],
   declarations: [
@@ -33,8 +35,7 @@ import { AsyncEmailValidatorDirective } from '../validators/async-email-validato
     CountryfromISOPipe,
     MailPageComponent,
     UserPageComponent,
-    EditUserComponent,
-    AsyncEmailValidatorDirective
+    EditUserComponent
   ],
   providers: [
     UsersService

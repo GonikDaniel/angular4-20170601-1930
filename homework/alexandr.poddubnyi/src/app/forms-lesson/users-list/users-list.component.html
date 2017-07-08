@@ -1,0 +1,25 @@
+<h1>Users</h1>
+<ul class="list-group">
+  <li *ngFor="let user of users; let i = index"
+      class="list-group-item justify-content-between">
+    <div class="media d-flex align-items-center">
+      <img class="d-flex mr-5 rounded-circle" style="width: 150px" [src]="user.photo || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'" [alt]="user.firstName">
+      <div class="media-body">
+        <h5 class="mt-0">{{user.firstName}} {{user.surname}}</h5>
+        <p>
+          <strong>Country:</strong> {{user.country}}
+        </p>
+        <p>
+          <strong>Email:</strong> <em>{{user.email}}</em>
+        </p>
+      </div>
+    </div>
+    <button (click)="editUser(i)"
+            type="button"
+            class="btn btn-info">Edit</button>
+    <button (click)="editUserReactive(i)"
+            type="button"
+            class="btn btn-info">Edit Reactive</button>
+  </li>
+</ul>
+

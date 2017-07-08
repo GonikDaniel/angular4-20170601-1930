@@ -5,6 +5,7 @@ import { MailboxComponent } from './mailbox/mailbox.component';
 import { UsersCurrencyComponent } from './users-currency/users-currency.component';
 import { WikiRxSearchComponent } from './wiki-rx-search/wiki-rx-search.component';
 import { UsersRoutingComponent } from './users-routing/users-routing.component';
+import { UsersListComponent } from 'app/forms-lesson/users-list/users-list.component';
 
 
 const routes: Routes = [
@@ -12,9 +13,10 @@ const routes: Routes = [
   { path: 'users-currency', component: UsersCurrencyComponent },
   { path: 'wiki-rx-search', component: WikiRxSearchComponent },
   { path: 'users-routing', component: UsersRoutingComponent },
+  { path: 'forms-lesson', component: UsersListComponent},
   {
     path: '',
-    redirectTo: 'wiki-rx-search',
+    redirectTo: 'forms-lesson',
     pathMatch: 'full'
   }
 ];
