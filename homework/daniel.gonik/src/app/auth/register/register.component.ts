@@ -38,17 +38,17 @@ export class RegisterComponent implements OnInit {
     this.user.statusChanges.subscribe(() => console.log(this.user.errors))
   }
 
-  register() {
+  public register() {
     if (!this.user.valid) return;
 
     this.authService.register(this.user.value)
       .subscribe(
-        (user) => this._login(user.username, user.password),
+        (user) => this.login(user.username, user.password),
         (error) => console.error(error)
       );
   }
 
-  private _login(username, password) {
+  private login(username, password) {
     this.authService.login(username, password)
       .subscribe(
         (data) => this.router.navigate(['/app/inbox']), // this.returnUrl
@@ -57,14 +57,14 @@ export class RegisterComponent implements OnInit {
   }
 
   private uniqueEmail(formControl: FormControl) {
-    if(!this.contactsService.isEmailUnique(formControl.value)) {
+    if (!this.contactsService.isEmailUnique(formControl.value)) {
       return Observable.of({ uniqueEmail: { error: 'Email has to be unique!' } });
     }
     return Observable.of(null);
   }
 
   private uniqueUsername(formControl: FormControl) {
-    if(!this.contactsService.isUsernameUnique(formControl.value)) {
+    if (!this.contactsService.isUsernameUnique(formControl.value)) {
       return Observable.of({ uniqueUsername: { error: 'Username has to be unique!' } });
     }
     return Observable.of(null);

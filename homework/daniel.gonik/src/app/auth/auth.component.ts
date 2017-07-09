@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit {
 
   public routeLinks: any[];
+
   constructor(
     private authService: AuthService
   ) {

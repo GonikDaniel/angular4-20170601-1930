@@ -14,11 +14,11 @@ import { WikiSearchService } from '../wiki-search.service';
   styleUrls: ['./widget.component.css']
 })
 export class WidgetComponent {
-  items: Observable<string[]>;
+  public items: Observable<string[]>;
+  private searchTermStream = new Subject<string>();
 
   constructor(private wikiSearchService: WikiSearchService) {}
 
-  private searchTermStream = new Subject<string>();
   search(search: string) {
     this.searchTermStream.next(search);
   }

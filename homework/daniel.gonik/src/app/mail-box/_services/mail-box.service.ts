@@ -15,28 +15,28 @@ export class MailBoxService {
     };
   }
 
-  getEmails() {
-    return this.cache.posts.length
-      ? this.getFromCache('posts')
-      : this.fetchData('posts');
+  public getAuthorById(id) {
+    return this.cache.users.length
+      ? this.getFromCacheById('users', id)
+      : this.fetchDataById('users', id);
   }
 
-  getAuthors() {
+  public getAuthors() {
     return this.cache.users.length
       ? this.getFromCache('users')
       : this.fetchData('users');
   }
 
-  getEmailById(id) {
+  public getEmailById(id) {
     return this.cache.posts.length
       ? this.getFromCacheById('posts', id)
       : this.fetchDataById('posts', id);
   }
 
-  getAuthorById(id) {
-    return this.cache.users.length
-      ? this.getFromCacheById('users', id)
-      : this.fetchDataById('users', id);
+  public getEmails() {
+    return this.cache.posts.length
+      ? this.getFromCache('posts')
+      : this.fetchData('posts');
   }
 
   private getFromCache(entity) {

@@ -13,10 +13,18 @@ const users = [
 export class AuthService {
 
   constructor(
-     private router: Router
+    private router: Router
   ) { }
 
-  login(username, password) {
+  get isAuthorized() {
+    return localStorage.getItem('user') !== null;
+  }
+
+  get mockedUsers() {
+    return users;
+  }
+
+  public login(username, password) {
     const authenticatedUser = users.find(u => u.username === username);
     return Observable.create(observer => {
       let result;
@@ -29,7 +37,12 @@ export class AuthService {
     });
   }
 
-  register(model) {
+  public logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/auth/login']);
+  }
+
+  public register(model) {
     return Observable.create(observer => {
       const user = new User(
         users.length, // id
@@ -42,18 +55,5 @@ export class AuthService {
       users.push(user);
       observer.next(user);
     });
-  }
-
-  logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/auth/login']);
-  }
-
-  get mockedUsers() {
-    return users;
-  }
-
-  get isAuthorized() {
-    return localStorage.getItem('user') !== null;
   }
 }

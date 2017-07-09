@@ -33,6 +33,10 @@ export class MailListComponent implements OnInit {
     });
   }
 
+  bookmark(index) {
+    this.emails[index].bookmarked = !this.emails[index].bookmarked;
+  }
+
   readEmail(email) {
     this.router.navigate(['/app/emails', email.id], {
       queryParams: {
@@ -61,7 +65,4 @@ export class MailListComponent implements OnInit {
     document.body.style.paddingRight = '';
   }
 
-  bookmark(index) {
-    this.emails[index].bookmarked = !this.emails[index].bookmarked;
-  }
 }

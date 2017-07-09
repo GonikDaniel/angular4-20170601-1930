@@ -47,6 +47,12 @@ export class ContactEditComponent implements OnInit {
     });
   }
 
+  public filterCountries(val) {
+    return val
+      ? this.countries.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
+      : this.countries;
+  }
+
   public onSave() {
     this.contactModel.value.id = this.contact.id;
     if (this.contactModel.valid) {
@@ -82,12 +88,6 @@ export class ContactEditComponent implements OnInit {
       .pluck('country')
       .startWith(null)
       .map(search => this.filterCountries(search));
-  }
-
-  filterCountries(val) {
-    return val
-      ? this.countries.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.countries;
   }
 
   private countryAsyncValidator(formControl: FormControl) {

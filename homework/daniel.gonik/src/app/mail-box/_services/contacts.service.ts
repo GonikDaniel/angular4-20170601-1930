@@ -18,21 +18,29 @@ export class ContactsService {
     }
   }
 
-  getUsers() {
+  public getCountries() {
+    return countries.map(country => country.code);
+  }
+
+  public getUserById(id) {
+    return this.getFromCacheById(id);
+  }
+
+  public getUsers() {
     return this.contacts.length
       ? this.getFromCache()
       : this.fetchData();
   }
 
-  getUserById(id) {
-    return this.getFromCacheById(id);
+  public isEmailUnique(email, id = null) {
+    return !this.contacts.find(contact => contact.email === email && contact.id !== id);
   }
 
-  getCountries() {
-    return countries.map(country => country.code);
+  public isUsernameUnique(username) {
+    return !this.authService.mockedUsers.find(user => user.username === username);
   }
 
-  saveContact(contact) {
+  public saveContact(contact) {
     return Observable.create(observer => {
       const index = this.contacts.findIndex(item => item.id === contact.id);
       if (index !== -1) {
@@ -44,14 +52,6 @@ export class ContactsService {
         observer.complete();
       }
     });
-  }
-
-  isEmailUnique(email, id = null) {
-    return !this.contacts.find(contact => contact.email === email && contact.id !== id);
-  }
-
-  isUsernameUnique(username) {
-    return !this.authService.mockedUsers.find(user => user.username === username);
   }
 
   private getFromCache() {
