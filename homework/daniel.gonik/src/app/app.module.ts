@@ -36,7 +36,6 @@ import { MailViewComponent } from './mail-box/mail-view/mail-view.component';
 import { ContactsComponent } from './mail-box/contacts/contacts.component';
 import { ContactViewComponent } from './mail-box/contact-view/contact-view.component';
 import { ContactEditComponent } from './mail-box/contact-edit/contact-edit.component';
-import { WidgetComponent } from './wiki/widget/widget.component';
 import { SettingsComponent } from './mail-box/settings/settings.component';
 
 import { RelativeDatePipe } from './_pipes/relative-date.pipe';
@@ -65,7 +64,6 @@ import { routes } from './app.routes';
     MailViewComponent,
     ContactsComponent,
     ContactViewComponent,
-    WidgetComponent,
     RelativeDatePipe,
     AutofocusDirective,
     SettingsComponent,
